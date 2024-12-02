@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReviewCinema</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #007BFF;
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+        hr {
+            border: none;
+            border-top: 3px solid #007BFF;
+            width: 80%;
+            margin: 10px auto 20px;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-size: 1.2em;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+        .username {
+            font-weight: bold;
+            color: #333;
+            margin-right: 5px;
+        }
+        .auth-links a {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 5px;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+        .auth-links a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>ReviewCinema</h1>
+    <hr>
+    <div class="container">
+        <a href="{% url 'movie:movie_list' %}">ReviewCinema 이동하기</a>
+        <div class="auth-links">
+            {% if user.is_authenticated %}
+                <span class="username">{{ user.username }}</span> /
+                <a href="{% url 'common:logout' %}">로그아웃</a>
+            {% else %}
+                <a href="{% url 'common:login' %}">로그인하기</a>
+                <a href="{% url 'common:signup' %}">회원가입</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
