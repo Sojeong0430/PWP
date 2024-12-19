@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영화 목록</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #007BFF;
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        li {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        .movie-title {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+        .movie-details {
+            margin: 10px 0;
+            font-size: 1em;
+            color: #555;
+        }
+        .movie-actions a {
+            margin-right: 15px;
+            color: #FF4B4B;
+            font-weight: normal;
+        }
+        .movie-actions a:hover {
+            color: #FF0000;
+        }
+        .links {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .links a {
+            display: inline-block;
+            margin: 5px 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .links a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>영화 목록</h1>
+    <ul>
+        {% for mv in movies %}
+        <li>
+            <span class="movie-title"><a href="{% url 'review:review_list' mv.id %}">{{ mv.name }}</a></span>
+            <div class="movie-details">
+                감독: {{ mv.director }} / 장르: {{ mv.genre }}<br>
+                줄거리: {{ mv.content }}
+            </div>
+            <div class="movie-actions">
+                <a href="{% url 'movie:delete_movie' mv.id %}">삭제</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="links">
+        <a href="{% url 'movie:add_movie' %}">영화 추가하기</a>
+        <a href="{% url 'main:main' %}">메인으로 돌아가기</a>
+    </div>
+</body>
+</html>
